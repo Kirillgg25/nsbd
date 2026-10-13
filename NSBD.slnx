@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="NSBD.Core/NSBD.Core.csproj" />
+  <Project Path="NSBD.Desktop/NSBD.Desktop.csproj" />
+  <Project Path="NSBD.Web/NSBD.Web.csproj" />
+</Solution>

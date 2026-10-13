@@ -1,0 +1,19 @@
+﻿node_modules/
+data/users.json
+data/app.db
+data/app.db-*
+.env
+.vs/
+.stfolder/
+.driver_updates/
+*.sync-conflict-*
+
+# Local runtime and build output
+.nsbd-browser/
+.nsbd.pid
+.nsbd-desktop.pid
+release/
+**/bin/
+**/obj/
+.env.*
+!.env.example

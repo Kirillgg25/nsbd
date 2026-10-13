@@ -1,0 +1,18 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="NSBD.Desktop.Views.CloseChoiceWindow"
+        Title="Close NSBD Network Monitor"
+        Width="460"
+        Height="230"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner">
+    <Grid RowDefinitions="Auto,Auto,*" Margin="24" RowSpacing="16">
+        <TextBlock FontSize="20" FontWeight="Bold" Text="What should happen when closing?" />
+        <CheckBox Grid.Row="1" x:Name="RememberCheckBox" Content="Remember my choice" />
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8" VerticalAlignment="Bottom">
+            <Button Classes="secondary" Content="Cancel" Click="Cancel_OnClick" />
+            <Button Classes="secondary" Content="Minimize to tray" Click="Minimize_OnClick" />
+            <Button Classes="primary" Content="Exit" Click="Exit_OnClick" />
+        </StackPanel>
+    </Grid>
+</Window>

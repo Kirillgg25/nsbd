@@ -1,0 +1,131 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:NSBD.Desktop.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1100" d:DesignHeight="700"
+        x:Class="NSBD.Desktop.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Icon="/Assets/nsbd-icon.ico"
+        Title="NSBD Network Monitor"
+        Background="#171A1F"
+        Width="1100"
+        Height="700">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainViewModel />
+    </Design.DataContext>
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto" Margin="24">
+        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="20">
+            <StackPanel Spacing="4">
+                <TextBlock FontSize="28" FontWeight="Bold" Text="NSBD Network Monitor" />
+                <TextBlock Text="Live network activity and security analysis" Opacity="0.7" />
+                <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,8,0,0">
+                    <Border Classes="status-pill">
+                        <TextBlock Text="{Binding CaptureStatus}" />
+                    </Border>
+                    <TextBlock VerticalAlignment="Center" Text="{Binding AlertCount, StringFormat='Alerts: {0}'}" Opacity="0.75" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                <Button Classes="primary" Content="{Binding CaptureActionText}" Click="ToggleCapture_OnClick" />
+                <Button Classes="secondary" Content="Clear" Click="ClearEvents_OnClick" />
+                <Button Classes="secondary" Content="Settings" Click="Settings_OnClick" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" ColumnDefinitions="2*,Auto,Auto,Auto,2*,Auto,Auto" ColumnSpacing="10" Margin="0,16,0,0">
+            <TextBox Grid.Column="0" Text="{Binding SearchText}" PlaceholderText="Search IP, time, protocol, status..." />
+            <TextBox Grid.Column="1" Width="110" Text="{Binding PortFilter}" PlaceholderText="Port" />
+            <ComboBox Grid.Column="2" Width="130" ItemsSource="{Binding StatusOptions}" SelectedItem="{Binding StatusFilter}" />
+            <ComboBox Grid.Column="3" Width="125" ItemsSource="{Binding ProtocolOptions}" SelectedItem="{Binding ProtocolFilter}" />
+            <ComboBox Grid.Column="4" ItemsSource="{Binding NetworkAdapters}" SelectedItem="{Binding SelectedNetworkAdapter}" />
+            <Button Classes="secondary" Grid.Column="5" Content="Save" Click="SaveSnapshot_OnClick" />
+            <Button Classes="secondary" Grid.Column="6" Content="Load" Click="LoadSnapshot_OnClick" />
+        </Grid>
+
+        <UniformGrid Grid.Row="2" Columns="4" Margin="0,16,0,20">
+            <Border Classes="stat-card">
+                <StackPanel>
+                    <TextBlock Text="Connections" />
+                    <TextBlock Text="{Binding TotalConnections}" Classes="stat-value" />
+                </StackPanel>
+            </Border>
+            <Border Classes="stat-card">
+                <StackPanel>
+                    <TextBlock Text="Active IPs" />
+                    <TextBlock Text="{Binding ActiveIpCount}" Classes="stat-value" />
+                </StackPanel>
+            </Border>
+            <Border Classes="stat-card">
+                <StackPanel>
+                    <TextBlock Text="External IPs" />
+                    <TextBlock Text="{Binding ExternalIpCount}" Classes="stat-value" />
+                </StackPanel>
+            </Border>
+            <Border Classes="stat-card">
+                <StackPanel>
+                    <TextBlock Text="Captured packets" />
+                    <TextBlock Text="{Binding CapturedPacketCount}" Classes="stat-value" />
+                </StackPanel>
+            </Border>
+        </UniformGrid>
+
+        <Grid Grid.Row="3" ColumnDefinitions="3*,2*" ColumnSpacing="18">
+            <Border Grid.Column="0" Classes="panel">
+                <Grid RowDefinitions="Auto,*">
+                    <TextBlock FontSize="18" FontWeight="Bold" Text="Network events" />
+                    <DataGrid Grid.Row="1"
+                              Margin="0,10,0,0"
+                              ItemsSource="{Binding Events}"
+                              SelectionMode="Extended"
+                              KeyDown="EventsGrid_OnKeyDown"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              GridLinesVisibility="Horizontal">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Time" Binding="{Binding Timestamp}" Width="1.5*" />
+                            <DataGridTextColumn Header="Source" Binding="{Binding SourceIp}" Width="1.3*" />
+                            <DataGridTextColumn Header="Destination" Binding="{Binding DestinationIp}" Width="1.3*" />
+                            <DataGridTextColumn Header="Port" Binding="{Binding Port}" Width="0.7*" />
+                            <DataGridTextColumn Header="Protocol" Binding="{Binding Protocol}" Width="0.8*" />
+                            <DataGridTextColumn Header="Service" Binding="{Binding Service}" Width="1.0*" />
+                            <DataGridTextColumn Header="Owner" Binding="{Binding DestinationOwner}" Width="1.4*" />
+                            <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="0.9*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="1" Classes="panel">
+                <Grid RowDefinitions="Auto,*">
+                    <TextBlock FontSize="18" FontWeight="Bold" Text="Security alerts" />
+                    <ScrollViewer Grid.Row="1" Margin="0,10,0,0" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl ItemsSource="{Binding Alerts}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Classes="alert" Margin="0,0,0,10">
+                                        <StackPanel Spacing="4">
+                                            <TextBlock Text="{Binding Level}" FontWeight="Bold" />
+                                            <TextBlock Text="{Binding Title}" FontWeight="SemiBold" />
+                                            <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Opacity="0.8" />
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" Spacing="18" Margin="0,14,0,0">
+            <TextBlock Opacity="0.7" Text="{Binding FileStatus}" />
+            <TextBlock Opacity="0.6" Text="Updates every 1 second. Only packet headers are collected." />
+        </StackPanel>
+    </Grid>
+
+</Window>

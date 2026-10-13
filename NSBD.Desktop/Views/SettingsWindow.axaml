@@ -1,0 +1,32 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="using:NSBD.Desktop.Views"
+        x:Class="NSBD.Desktop.Views.SettingsWindow"
+        x:DataType="local:SettingsWindow"
+        Title="NSBD Settings"
+        Width="520"
+        Height="360"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner">
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto" Margin="24" RowSpacing="14">
+        <TextBlock FontSize="22" FontWeight="Bold" Text="Settings" />
+
+        <Grid Grid.Row="1" ColumnDefinitions="2*,*" ColumnSpacing="16">
+            <TextBlock VerticalAlignment="Center" Text="Refresh interval" />
+            <ComboBox Grid.Column="1" x:Name="RefreshIntervalBox" ItemsSource="{Binding RefreshIntervals}" />
+        </Grid>
+
+        <Grid Grid.Row="2" ColumnDefinitions="2*,*" ColumnSpacing="16">
+            <TextBlock VerticalAlignment="Center" Text="When closing with X" />
+            <ComboBox Grid.Column="1" x:Name="CloseBehaviorBox" ItemsSource="{Binding CloseBehaviors}" />
+        </Grid>
+
+        <CheckBox Grid.Row="3" x:Name="StartMinimizedCheckBox" Content="Start minimized to the system tray" />
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+            <Button Classes="secondary" Content="Default" Click="Default_OnClick" />
+            <Button Classes="secondary" Content="Cancel" Click="Cancel_OnClick" />
+            <Button Classes="primary" Content="Save" Click="Save_OnClick" />
+        </StackPanel>
+    </Grid>
+</Window>

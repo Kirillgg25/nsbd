@@ -1,0 +1,112 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="NSBD.Desktop.App"
+             xmlns:local="using:NSBD.Desktop"
+             RequestedThemeVariant="Dark">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator />
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <FluentTheme />
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
+        <Style Selector="TextBlock">
+            <Setter Property="Foreground" Value="#E6E9ED" />
+        </Style>
+        <Style Selector="DataGrid">
+            <Setter Property="Background" Value="#20252B" />
+            <Setter Property="Foreground" Value="#E6E9ED" />
+            <Setter Property="BorderBrush" Value="#3A424B" />
+        </Style>
+        <Style Selector="Border.stat-card">
+            <Setter Property="Background" Value="#282E35" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="16" />
+            <Setter Property="Margin" Value="0,0,10,0" />
+        </Style>
+        <Style Selector="TextBlock.stat-value">
+            <Setter Property="FontSize" Value="26" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="0,6,0,0" />
+        </Style>
+        <Style Selector="Border.panel">
+            <Setter Property="Background" Value="#20252B" />
+            <Setter Property="BorderBrush" Value="#3A424B" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="16" />
+        </Style>
+        <Style Selector="Border.alert">
+            <Setter Property="Background" Value="#393126" />
+            <Setter Property="BorderBrush" Value="#B58A4A" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
+        <Style Selector="Border.status-pill">
+            <Setter Property="Background" Value="#1E4D43" />
+            <Setter Property="BorderBrush" Value="#3FA98C" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Padding" Value="10,4" />
+        </Style>
+        <Style Selector="Button">
+            <Setter Property="Background" Value="#0F2433" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="BorderBrush" Value="#0F2433" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="16,9" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+        <Style Selector="Button:pointerover">
+            <Setter Property="Background" Value="#193B50" />
+            <Setter Property="BorderBrush" Value="#193B50" />
+        </Style>
+        <Style Selector="Button:pressed">
+            <Setter Property="Background" Value="#0A1822" />
+        </Style>
+        <Style Selector="Button.secondary">
+            <Setter Property="Background" Value="#20252B" />
+            <Setter Property="Foreground" Value="#F1F4F7" />
+            <Setter Property="BorderBrush" Value="#8BA6BA" />
+        </Style>
+        <Style Selector="Button.secondary:pointerover">
+            <Setter Property="Background" Value="#2C353E" />
+            <Setter Property="BorderBrush" Value="#BFD2DF" />
+        </Style>
+        <Style Selector="TextBox">
+            <Setter Property="Background" Value="#20252B" />
+            <Setter Property="Foreground" Value="#E6E9ED" />
+            <Setter Property="BorderBrush" Value="#53616D" />
+            <Setter Property="CaretBrush" Value="#49BEE0" />
+        </Style>
+        <Style Selector="TextBox:focus">
+            <Setter Property="BorderBrush" Value="#49BEE0" />
+        </Style>
+        <Style Selector="ComboBox">
+            <Setter Property="Background" Value="#20252B" />
+            <Setter Property="Foreground" Value="#E6E9ED" />
+            <Setter Property="BorderBrush" Value="#53616D" />
+        </Style>
+        <Style Selector="ComboBox:pointerover">
+            <Setter Property="Background" Value="#2C353E" />
+            <Setter Property="BorderBrush" Value="#8BA6BA" />
+        </Style>
+        <Style Selector="ComboBoxItem">
+            <Setter Property="Background" Value="#20252B" />
+            <Setter Property="Foreground" Value="#E6E9ED" />
+            <Setter Property="Padding" Value="12,9" />
+        </Style>
+        <Style Selector="ComboBoxItem:pointerover">
+            <Setter Property="Background" Value="#2C3B47" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+        </Style>
+        <Style Selector="ComboBoxItem:selected">
+            <Setter Property="Background" Value="#1E4D43" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+        </Style>
+    </Application.Styles>
+</Application>
